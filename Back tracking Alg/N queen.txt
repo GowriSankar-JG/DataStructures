@@ -1,0 +1,58 @@
+1) N-Queens Problem:
+
+#include <stdio.h>
+#include <string.h>
+
+int isSafe(int N, char mat[][N], int r, int c)
+{
+	int i, j;
+	//Column Checking
+	for ( i = 0; i < r; i++)
+		if (mat[i][c] == 'Q')
+			return 0;
+	//Left Diagonal Checking
+	for ( i = r, j = c; i >= 0 && j >= 0; i--, j--)
+		if (mat[i][j] == 'Q')
+			return 0;
+	//Right Diagonal Checking
+	for ( i = r, j = c; i >= 0 && j < N; i--, j++)
+		if (mat[i][j] == 'Q')
+			return 0;
+	return 1;
+}
+
+void nQueen(int N, char mat[][N], int r)
+{
+	int i,j;
+	if (r == N)
+	{
+		for ( i = 0; i < N; i++) 
+		{
+			for ( j = 0; j < N; j++)
+				printf("%c ", mat[i][j]);
+			printf("\n");
+		}
+		printf("\n");
+		return;
+	}
+	
+	for ( i = 0; i < N; i++) 
+	{
+		if (isSafe(N, mat, r, i)) 
+		{
+			mat[r][i] = 'Q';
+			nQueen(N, mat, r + 1);
+			mat[r][i] = '-';
+		}
+	}
+}
+
+void main()
+{
+	int N;
+	printf("Enter the size of chess board : ");
+	scanf("%d", &N);
+	char mat[N][N];
+	memset(mat, '-', sizeof(mat));
+	nQueen(N, mat, 0);
+}

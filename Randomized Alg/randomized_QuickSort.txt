@@ -1,0 +1,45 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+
+void quick(int a[],int low,int high)
+{
+	int temp,i,j,pivot;
+	if(low<high)
+	{
+		srand(time(0));
+		pivot=(rand()%(high-low+1))+low;
+		i=low;
+		j=high;
+		while(i<j)
+		{
+			while(a[i]<=a[pivot] && i<high)
+				i++;
+			while(a[j]>a[pivot])
+				j--;
+			if(i<j)
+			{
+				temp=a[i];
+				a[i]=a[j];
+				a[j]=temp;
+			}
+		}
+		temp=a[pivot];
+		a[pivot]=a[j];
+		a[j]=temp;
+		quick(a,low,j-1);
+		quick(a,j+1,high);
+	}
+}
+
+void main()
+{
+	int n;
+	scanf("%d",&n);
+	int a[n],i,key;
+	for(i=0;i<n;i++)
+		scanf("%d",&a[i]);
+	quick(a,0,n-1);
+	for(i=0;i<n;i++)
+		printf("%d",a[i]);
+}

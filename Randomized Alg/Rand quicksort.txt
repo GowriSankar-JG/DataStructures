@@ -1,0 +1,47 @@
+#include<stdio.h>
+#include<stdlib.h>
+int a[]={7,3,1,4,0,2},n,i;
+int swap(intc,int b)
+{
+int t;
+t=a[c];
+a[c]=a[b];
+a[b]=t;
+}
+int partition(int a[],int l,int h)
+{
+int pivot=a[h];
+int i=(l-1);
+for(int j=l;j<=h-1;j++)
+{
+if(a[j]<=pivot)
+{
+i++;
+swap(i,j);
+}
+}
+swap(i+1,h);
+return (i+1);
+}
+int partition_r(int a[],intl,int h)
+{
+int pivot=l+rand()%(h-l);
+swap(pivot,h);
+return partition(a,l,h);
+}
+void quicksort(int a[],intl,int h)
+{
+if(l<h)
+{
+int pi=partition_r(a,l,h);
+quicksort(a,l,pi-1);
+quicksort(a,pi+1,h);
+}
+}
+int main()
+{
+n=sizeof(a)/sizeof(a[0]);
+quicksort(a,0,n-1);
+for(i=0;i<n;i++)
+printf("%d\t",a[i]);
+}

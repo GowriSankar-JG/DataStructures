@@ -1,0 +1,32 @@
+#include<stdio.h>
+#include<stdlib.h>
+Int getRandom(int x, int y)
+{
+return (x+rand()%(y-x+1));
+}
+Int binarysearch(intarr[],intlow,inthigh,intele)
+{
+if(low<high)
+{
+int mid=getRandom(low,high);
+if(arr[mid]==ele)
+return mid;
+if(ele>arr[mid])
+returnbinarysearch(arr,mid+1,high,ele);
+if(ele<arr[mid])
+returnbinarysearch(arr,low,mid-1,ele);
+}
+}
+main()
+{
+Int n,m,i;
+printf("enter the no of elements to be inserted");
+scanf("%d",&n);
+printf("enter the elements");
+intarr[n];
+for(i=0;i<n;i++)
+scanf("%d",&arr[i]);
+printf("enter the element to be checked");
+scanf("%d",&m);
+printf("\n%d",binarysearch(arr,0,n-1,m));
+}
